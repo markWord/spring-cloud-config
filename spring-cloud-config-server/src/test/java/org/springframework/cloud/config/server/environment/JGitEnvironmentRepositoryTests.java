@@ -376,9 +376,9 @@ public class JGitEnvironmentRepositoryTests {
 																		// testing
 
 		// refresh()->return
-		// git.getRepository().findRef("HEAD").getObjectId().getName();
+		// git.getRepository().getRef("HEAD").getObjectId().getName();
 		Ref headRef = mock(Ref.class);
-		when(repository.findRef(anyString())).thenReturn(headRef);
+		when(repository.getRef(anyString())).thenReturn(headRef);
 
 		ObjectId newObjectId = ObjectId.fromRaw(new int[] { 1, 2, 3, 4, 5 });
 		when(headRef.getObjectId()).thenReturn(newObjectId);
@@ -432,9 +432,9 @@ public class JGitEnvironmentRepositoryTests {
 		when(git.merge()).thenReturn(mergeCommand);
 		when(mergeCommand.call()).thenThrow(new NotMergedException()); //here is our exception we are testing
 
-		//refresh()->return git.getRepository().findRef("HEAD").getObjectId().getName();
+		//refresh()->return git.getRepository().getRef("HEAD").getObjectId().getName();
 		Ref headRef = mock(Ref.class);
-		when(repository.findRef(anyString())).thenReturn(headRef);
+		when(repository.getRef(anyString())).thenReturn(headRef);
 
 		ObjectId newObjectId = ObjectId.fromRaw(new int[]{1,2,3,4,5});
 		when(headRef.getObjectId()).thenReturn(newObjectId);
@@ -500,9 +500,9 @@ public class JGitEnvironmentRepositoryTests {
 		when(resetCommand.call()).thenReturn(ref);
 
 		// refresh()->return
-		// git.getRepository().findRef("HEAD").getObjectId().getName();
+		// git.getRepository().getRef("HEAD").getObjectId().getName();
 		Ref headRef = mock(Ref.class);
-		when(repository.findRef(anyString())).thenReturn(headRef);
+		when(repository.getRef(anyString())).thenReturn(headRef);
 
 		ObjectId newObjectId = ObjectId.fromRaw(new int[] { 1, 2, 3, 4, 5 });
 		when(headRef.getObjectId()).thenReturn(newObjectId);

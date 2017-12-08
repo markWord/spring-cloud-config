@@ -3,17 +3,20 @@ info:
 spring:
   application:
     name: configserver
-  autoconfigure.exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  rabbitmq:
+      host: 192.168.9.141
+      port: 5673
+      username: guest
+      password: guest
   jmx:
     default_domain: cloud.config.server
   cloud:
     config:
       server:
         git:
-          uri: https://github.com/spring-cloud-samples/config-repo
-          repos:
-            - patterns: multi-repo-demo-*
-              uri: https://github.com/spring-cloud-samples/config-repo
+          uri: https://github.com/markWord/config-repo
+          searchPaths: foo,bar*
+
 
 server:
   port: 8888

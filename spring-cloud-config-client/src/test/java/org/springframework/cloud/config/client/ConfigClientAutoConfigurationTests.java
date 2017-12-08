@@ -19,7 +19,6 @@ package org.springframework.cloud.config.client;
 import org.junit.Test;
 
 import org.springframework.beans.factory.BeanFactoryUtils;
-import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -40,7 +39,7 @@ public class ConfigClientAutoConfigurationTests {
 	@Test
 	public void withParent() {
 		ConfigurableApplicationContext context = new SpringApplicationBuilder(
-				ConfigClientAutoConfiguration.class).child(Object.class).web(WebApplicationType.NONE).run();
+				ConfigClientAutoConfiguration.class).child(Object.class).web(false).run();
 		assertEquals(1, BeanFactoryUtils.beanNamesForTypeIncludingAncestors(context,
 				ConfigClientProperties.class).length);
 		context.close();

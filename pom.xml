@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.springframework.cloud</groupId>
 	<artifactId>spring-cloud-config</artifactId>
-	<version>2.0.0.BUILD-SNAPSHOT</version>
+	<version>1.4.0.RELEASE</version>
 	<packaging>pom</packaging>
 	<name>Spring Cloud Config</name>
 	<description>Spring Cloud Config</description>
@@ -11,7 +11,7 @@
 	<parent>
 		<groupId>org.springframework.cloud</groupId>
 		<artifactId>spring-cloud-build</artifactId>
-		<version>2.0.0.BUILD-SNAPSHOT</version>
+		<version>1.3.6.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<scm>
@@ -22,15 +22,16 @@
 	</scm>
     <properties>
         <bintray.package>config</bintray.package>
-		<spring-cloud-commons.version>2.0.0.BUILD-SNAPSHOT</spring-cloud-commons.version>
+		<spring-cloud-commons.version>1.3.0.RELEASE</spring-cloud-commons.version>
     </properties>
 	<modules>
 		<module>spring-cloud-config-dependencies</module>
 		<module>spring-cloud-config-client</module>
 		<module>spring-cloud-config-server</module>
 		<module>spring-cloud-config-monitor</module>
-		<module>spring-cloud-config-sample</module>
 		<module>spring-cloud-starter-config</module>
+		<module>spring-cloud-config-sample</module>
+		<module>spring-cloud-config-server-sample</module>
 		<module>docs</module>
 	</modules>
     <dependencyManagement>
@@ -51,7 +52,8 @@
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-test-support</artifactId>
+				<artifactId>spring-cloud-commons</artifactId>
+				<type>test-jar</type>
 				<scope>test</scope>
 				<version>${spring-cloud-commons.version}</version>
 			</dependency>

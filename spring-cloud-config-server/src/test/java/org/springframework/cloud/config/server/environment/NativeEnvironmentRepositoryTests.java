@@ -20,7 +20,6 @@ import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.config.environment.Environment;
 import org.springframework.cloud.config.server.environment.SearchPathLocator.Locations;
@@ -39,7 +38,7 @@ public class NativeEnvironmentRepositoryTests {
 	@Before
 	public void init() {
 		ConfigurableApplicationContext context = new SpringApplicationBuilder(
-				NativeEnvironmentRepositoryTests.class).web(WebApplicationType.NONE).run();
+				NativeEnvironmentRepositoryTests.class).web(false).run();
 		this.repository = new NativeEnvironmentRepository(context.getEnvironment());
 		this.repository.setVersion("myversion");
 		this.repository.setDefaultLabel(null);

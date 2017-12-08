@@ -15,16 +15,15 @@
  */
 package org.springframework.cloud.config.server;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.cloud.config.environment.Environment;
 import org.springframework.cloud.config.server.environment.SvnKitEnvironmentRepository;
 import org.springframework.cloud.config.server.test.ConfigServerTestUtils;
@@ -32,11 +31,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
-import static org.springframework.cloud.config.server.test.ConfigServerTestUtils.REPO_PREFIX;
 
 /**
  * @author Michael Prankl
@@ -83,8 +81,7 @@ public class SubversionConfigServerIntegrationTests {
 	@Test
 	public void updateUnavailableRepo() throws IOException {
 		contextLoads();
-		ConfigServerTestUtils.deleteLocalRepo("svn-config-repo");
-		assertThat(new File(REPO_PREFIX, "svn-config-repo")).doesNotExist();
+		assertTrue(ConfigServerTestUtils.deleteLocalRepo("svn-config-repo"));
 		contextLoads();
 	}
 

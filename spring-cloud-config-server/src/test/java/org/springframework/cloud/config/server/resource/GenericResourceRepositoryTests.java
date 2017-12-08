@@ -16,17 +16,15 @@
 
 package org.springframework.cloud.config.server.resource;
 
+import static org.junit.Assert.assertNotNull;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.config.server.environment.NativeEnvironmentRepository;
 import org.springframework.cloud.config.server.environment.NativeEnvironmentRepositoryTests;
 import org.springframework.context.ConfigurableApplicationContext;
-
-import static org.junit.Assert.assertNotNull;
 
 /**
  * @author Dave Syer
@@ -48,7 +46,7 @@ public class GenericResourceRepositoryTests {
 	@Before
 	public void init() {
 		this.context = new SpringApplicationBuilder(
-				NativeEnvironmentRepositoryTests.class).web(WebApplicationType.NONE).run();
+				NativeEnvironmentRepositoryTests.class).web(false).run();
 		this.nativeRepository = new NativeEnvironmentRepository(this.context.getEnvironment());
 		this.repository = new GenericResourceRepository(
 				this.nativeRepository);

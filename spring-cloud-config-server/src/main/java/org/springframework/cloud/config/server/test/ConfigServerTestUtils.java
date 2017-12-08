@@ -32,9 +32,6 @@ import java.io.IOException;
  * @author Daniel Lavoie
  */
 public class ConfigServerTestUtils {
-
-	public static final String REPO_PREFIX = "target/repos/";
-
 	public static Repository prepareBareRemote() throws IOException {
 		// Create a folder in the temp folder that will act as the remote repository
 		File remoteDir = File.createTempFile("remote", "");
@@ -68,11 +65,7 @@ public class ConfigServerTestUtils {
 			repoPath = repoPath + "/";
 		}
 		File source = new File(baseDir + "src/test/resources" + repoPath);
-		File dest = new File(buildDir + repoPath);
-		if (dest.exists()) {
-			FileUtils.delete(dest, FileUtils.RECURSIVE | FileUtils.RETRY);
-		}
-		FileSystemUtils.copyRecursively(source, dest);
+		FileSystemUtils.copyRecursively(source, new File(buildDir + repoPath));
 		File dotGit = new File(buildDir + repoPath + ".git");
 		File git = new File(buildDir + repoPath + "git");
 		if (git.exists()) {
@@ -109,14 +102,14 @@ public class ConfigServerTestUtils {
 	}
 
 	public static String copyLocalRepo(String path) throws IOException {
-		File dest = new File(REPO_PREFIX + path);
+		File dest = new File("target/repos/" + path);
 		FileSystemUtils.deleteRecursively(dest);
 		FileSystemUtils.copyRecursively(new File("target/repos/config-repo"), dest);
 		return "file:./target/repos/" + path;
 	}
 
 	public static boolean deleteLocalRepo(String path) throws IOException {
-		File dest = new File(REPO_PREFIX + path);
+		File dest = new File("target/repos/" + path);
 		return FileSystemUtils.deleteRecursively(dest);
 	}
 

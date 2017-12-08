@@ -1,0 +1,29 @@
+info:
+  component: Config Server
+spring:
+  application:
+    name: configserver
+  rabbitmq:
+      host: 192.168.9.141
+      port: 5673
+      username: guest
+      password: guest
+  jmx:
+    default_domain: cloud.config.server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/markWord/config-repo
+          searchPaths: '{application}'
+          basedir: D:/config-repo
+
+
+server:
+  port: 8888
+
+management:
+  context_path: /admin
+  security:
+    enabled: false
+

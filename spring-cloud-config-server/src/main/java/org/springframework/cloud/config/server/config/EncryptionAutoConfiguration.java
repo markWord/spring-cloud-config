@@ -37,7 +37,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
-import org.springframework.security.rsa.crypto.RsaAlgorithm;
 import org.springframework.security.rsa.crypto.RsaSecretEncryptor;
 import org.springframework.util.StringUtils;
 
@@ -80,7 +79,7 @@ public class EncryptionAutoConfiguration {
 
 	@Configuration
 	@ConditionalOnClass(RsaSecretEncryptor.class)
-	@ConditionalOnProperty(prefix = "encrypt.key-store", value = "location", matchIfMissing = false)
+	@ConditionalOnProperty(prefix = "encrypt.keyStore", value = "location", matchIfMissing = false)
 	protected static class KeyStoreConfiguration {
 
 		@Autowired
@@ -93,8 +92,7 @@ public class EncryptionAutoConfiguration {
 			KeyStoreTextEncryptorLocator locator = new KeyStoreTextEncryptorLocator(
 					new KeyStoreKeyFactory(keyStore.getLocation(), keyStore.getPassword().toCharArray()),
 					keyStore.getSecret(), keyStore.getAlias());
-			String algorithm = this.key.getRsa().getAlgorithm();
-			locator.setRsaAlgorithm(RsaAlgorithm.valueOf(algorithm.toUpperCase()));
+			locator.setRsaAlgorithm(this.key.getRsa().getAlgorithm());
 			locator.setSalt(this.key.getRsa().getSalt());
 			locator.setStrong(this.key.getRsa().isStrong());
 			return locator;
